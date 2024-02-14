@@ -57,5 +57,5 @@ Final Dataset - per_capita_df
 • The final dataset was derived as part of a limited analysing phase. dividing the population data and drug data years columns in a for loop e.g. drugByYear_dF[year] / kentuckypop2000_2019_df2[year].  I then created a new column with Yes/No values by using a lambda function which compares the main dataset with the coalmine dataset, if they matched it was yes, if no match no./
 • Missing data was identified for Roberston; there were no transactions in this county. However, according to Google,  the county does not have a pharmacy. This was set as 0 Finally, the new dataframe was saved to a CSV  “usecleanedData.csv”. This was so it could be used as a Python script but also so it could be used later as part of the preserving phase.
 
-
+![Alt text](relative%20path/to/vizsketch.jpg?raw=true "Title")
 
