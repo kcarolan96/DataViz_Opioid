@@ -109,7 +109,7 @@ This chart does not suggest that drug companies intentionally targeted these com
 8. Smithsonian Magazine. 2012. The Scientific Reason Complementary Colors Look Good together. (November 2012). Retrieved November 30, 2023 from https://www.smithsonianmag.com/smart-news/the-scientific-reason-complementary-colors-look-good-together-114030051/
 
    
-**Coding References **
+**Coding References**
 1. Pandas - http://pandas.pydata.org/
 2. Plotly - https://plotly.com/python/
 3. Plotly traces - https://plotly.com/python/creating-and-updating-figures/#adding-traces
