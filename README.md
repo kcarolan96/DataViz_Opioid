@@ -57,5 +57,63 @@ Final Dataset - per_capita_df
 • The final dataset was derived as part of a limited analysing phase. dividing the population data and drug data years columns in a for loop e.g. drugByYear_dF[year] / kentuckypop2000_2019_df2[year].  I then created a new column with Yes/No values by using a lambda function which compares the main dataset with the coalmine dataset, if they matched it was yes, if no match no./
 • Missing data was identified for Roberston; there were no transactions in this county. However, according to Google,  the county does not have a pharmacy. This was set as 0 Finally, the new dataframe was saved to a CSV  “usecleanedData.csv”. This was so it could be used as a Python script but also so it could be used later as part of the preserving phase.
 
-![Alt text](relative%20path/to/vizsketch.jpg?raw=true "Title")
+**Final Visualisation**
 
+My final visualisation was built as part of the presenting phase,  similar in design to my sketched data. 
+I created the final chart using the Plotly library in python making use of the graph_objects modules.
+Originally I looked at displaying all counties, however this was very cluttered and hard to read. Therefore by using head and tail for each year I visualised the top 10 and bottom 10
+Animation
+I constructed an interactive  horizontal barchart. This chart allowed the user to play through the time period from 2006-2019, or to select a year using the slider functionality at the bottom.
+In my sketch I thought I would use checkboxes to select the year. This did not look as clean as using the slider. I also experimented with a dropdown menu to select the year, however it was less obvious the years were changing when you pressed play. 
+This allowed me to create interaction by creating a moving bar chart. My solution was adapted from the Plotly animations documentation: https://plotly.com/python/animations/  and https://www.youtube.com/watch?v=lZNNmaWkiMI by Charming Data
+By assigning each year to a different frame it allowed each year to have its own “frame” which means you can go through them similar to a slideshow. The slider was  placed at the bottom where you can select a year manually, or a play button to automatically cycle through each frame. When you change the Year, the title of the Chart changes to reflect the year.
+
+
+Styling
+Colour
+I chose the colour palette of orange and blue. I am a previous user of ggplot2 in R and took the shades of orange and blue from here. Orange and light-blue were chosen as they are  colour-blind friendly as derivatives of Red and Blue, which are colour- blind friendly(Jeffrey Shaffer, 2016) This means that the chart should be accessible to most people. If I had been trying to show republican vs democrat I might have used red and blue, however I find orange and blue easier to look at. They are also complementary colours due to photoreceptor cells in our eyes, meaning the contrast acts in a balancing way (Smithsonian Magazine, 2012). The orange represents having coal mine, the blue was no coal mine
+Annotations
+Originally the percentage values were shown on the x axis as ticks.  However because there were 20 values it meant not all were showing depending on window size. To address this I placed the values after the bar. This made it immediately clear what per capita rate was attached to which county.
+Legend
+This part was particularly tricky to get right, as because I was using graph objects, if i tried to create a legend directly, it gave a marker for each year i.e coal mine yes/no 20006-2019, this broke the entire plot.
+To get around this I created an empty trace and overlaid on the existing graph. This then had the correct information as shown in the example  graph screenshot above. However, this was a flawed fix as it removed the interactivity that usually exists with a plotly legend. In General I would be able to select a legend object and toggle it on and off.
+Other Styling Points
+I removed the graph lines from the graph and removed the X and Y axis markers. This was an effort to reduce the visual noise in the graph. As the percentages were added as annotations, it was not necessary to have graph lines going from data points to X axis. The Play button and Pause buttons were padded to make sure they were not obstructing county names, I also added the special characters for pause and play beside, to decrease cognitive load when finding them.
+
+
+
+
+**Conclusion**
+The datasets, cleaned data, jupyter notebook and python script have been stored in google drive  folder as part of preserving phase.
+The visualisation presented here suggests that having a coal mine in a county correlates with higher rates of drug transactions. I think it effectively tells this story by showing it across the years, the counties in the top 10 were  mostly orange, the bottom 10 were almost always blue. It would be interesting to take another State such as Virginia and perform the same analysis or to take another state with large scale dangerous physical labour such as forestry or farming
+ It is important to note that I have only shown the top and bottom 10 counties. I have not included the ratio of how many counties have coal mines versus how many don’t. 
+It is also important to note that this chart does not take into account if buyers were travelling between counties, if a county with a high transaction volume was adjacent to a coalmining county but did not have coal itself. The values I present should be taken as a proxy or estimate rather than concrete per capita rates.
+The data gathering and integration phases could be improved for future work. It might be useful to build a visualisation by loading the data in batches, or storing the data in a relational database in the cloud so that one could create a heatmap across the united states, or select different counties and compare them.
+
+
+If I wanted to improve  this visualisation it would be useful to be able to select the Top N, i.e include a user input box, or drop down which allowed you to pick top 5, 10,25,50  or all counties, however I was not able to get this to work.
+In addition the legend I included was a hack as I could not get a legend to work when using multiple frames that did not break the transition. To achieve the legend I had to include a dummy frame and disable the legend for the actual graph. This means you could’t just select coal mine counties or non coal mine counties.
+I also would like to include smoother transitions between the frames
+This chart does not suggest that drug companies intentionally targeted these communities, however in conjunction with other evidence it could be useful visualisation to further this argument. 
+
+
+
+**References**
+1. Paige Moody Steven Rich. 2023. How deeply did prescription opioid Pills Flood Your County? see here. (September 2023). Retrieved November 8, 2023 from https://www.washingtonpost.com/investigations/interactive/2023/opioid-epidemic-pain-pills-sold-oxycodone-hydrocodone/ 
+2. US Census Bureau. 2021. County intercensal datasets: 2000-2010. (December 2021). Retrieved November 8, 2023 from https://www.census.gov/data/datasets/time-series/demo/popest/intercensal-2000-2010-counties.html 
+3. US Census Bureau. 2023. County population totals: 2010-2019. (March 2023). Retrieved November 30, 2023 from https://www.census.gov/data/datasets/time-series/demo/popest/2010s-counties-total.html 
+4. Wikipedia. 2023. Coal mining in Kentucky. (April 2023). Retrieved November 8, 2023 from https://en.wikipedia.org/wiki/Coal_mining_in_Kentucky 
+5. Ann K. Emery. 2017. When to use horizontal bar charts vs. Vertical Column Charts. (January 2017). Retrieved November 30, 2023 from https://depictdatastudio.com/when-to-use-horizontal-bar-charts-vs-vertical-column-charts/ 
+6. Amy Esselman. 2022. Horizontal versus Vertical Bar Chart. (March 2022). Retrieved November 6, 2023 from https://www.storytellingwithdata.com/blog/2022/1/21/which-bar-orientation-should-i-use 
+7. Jeffrey Shaffer, COO and VP of Information Technology and Analytics. 2016. 5 tips on designing colorblind-friendly visualizations. (April 2016). Retrieved November 10, 2023 from https://www.tableau.com/blog/examining-data-viz-rules-dont-use-red-green-together 
+8. Smithsonian Magazine. 2012. The Scientific Reason Complementary Colors Look Good together. (November 2012). Retrieved November 30, 2023 from https://www.smithsonianmag.com/smart-news/the-scientific-reason-complementary-colors-look-good-together-114030051/
+
+   
+**Coding References **
+1. Pandas - http://pandas.pydata.org/
+2. Plotly - https://plotly.com/python/
+3. Plotly traces - https://plotly.com/python/creating-and-updating-figures/#adding-traces
+4. Plotly Animations - https://plotly.com/python/animations/ 
+5. Create Racing Bar Graph - Python Plotly  https://www.youtube.com/watch?v=lZNNmaWkiMI 
+6. Matplotlib https://matplotlib.org/
+7. Notepad++ https://notepad-plus-plus.org/
